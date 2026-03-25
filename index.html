@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>СССР и Египет: от становления до разрыва | курсовая работа по истории</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #05090e;
+            color: #eef3fc;
+            line-height: 1.55;
+            scroll-behavior: smooth;
+        }
+
+        .bg-dynamic {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 10%, #0a1422, #010101);
+            z-index: -2;
+        }
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 230, 250, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 230, 250, 0.04) 1px, transparent 1px);
+            background-size: 48px 48px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+        }
+
+        .glass-header {
+            backdrop-filter: blur(14px);
+            background: rgba(8, 18, 28, 0.7);
+            border-radius: 2rem;
+            border: 1px solid rgba(0, 200, 255, 0.3);
+            padding: 0.9rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 12px 30px -10px rgba(0,0,0,0.5);
+        }
+        .title-main {
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(125deg, #ffffff, #7bc5ff, #2b9eff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .sub {
+            font-size: 0.8rem;
+            color: #8da3c0;
+            letter-spacing: 0.3px;
+        }
+
+        .menu-wrapper {
+            margin-top: 1rem;
+        }
+        .menu-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .country-pill {
+            background: rgba(15, 35, 50, 0.6);
+            border: 1px solid rgba(0, 180, 240, 0.5);
+            color: #cde5ff;
+            padding: 0.5rem 1.3rem;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.2s;
+            backdrop-filter: blur(4px);
+            font-family: inherit;
+            white-space: nowrap;
+        }
+        .country-pill:hover {
+            background: rgba(0, 160, 255, 0.2);
+            border-color: #3bc9ff;
+            transform: translateY(-2px);
+        }
+        .country-pill.active {
+            background: linear-gradient(95deg, #0077ff30, #00ccff40);
+            border-color: #6ad4ff;
+            color: white;
+            box-shadow: 0 0 10px rgba(0,180,255,0.3);
+        }
+
+        .page-panel {
+            display: none;
+            animation: fadeUp 0.5s ease;
+        }
+        .page-panel.active-panel {
+            display: block;
+        }
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(18px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-glow {
+            background: rgba(6, 16, 24, 0.65);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            border: 1px solid rgba(0, 200, 255, 0.2);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: 0.2s;
+        }
+        .section-header {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 1.4rem;
+            letter-spacing: -0.02em;
+            border-left: 5px solid #2dd4ff;
+            padding-left: 1.2rem;
+        }
+        .two-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .info-block {
+            background: rgba(0, 0, 0, 0.45);
+            border-radius: 1.6rem;
+            padding: 1.4rem 1.6rem;
+            border: 1px solid rgba(50, 150, 210, 0.3);
+            transition: 0.2s;
+        }
+        .img-place {
+            background: #0b111e;
+            border-radius: 1.2rem;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed #2f6f9e;
+            margin: 1rem 0 0.8rem 0;
+            color: #5c8ab3;
+            font-size: 0.85rem;
+            gap: 8px;
+            background-image: radial-gradient(circle at 10% 20%, #1e2f3f30 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .img-place i {
+            font-size: 1.6rem;
+            opacity: 0.7;
+        }
+        
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem 2rem;
+        }
+        .timeline-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0, 180, 230, 0.15);
+        }
+        .timeline-year {
+            font-weight: 800;
+            color: #5fc3ff;
+            min-width: 110px;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+            letter-spacing: -0.2px;
+        }
+        .timeline-desc {
+            color: #d0e2ff;
+            font-size: 0.9rem;
+            line-height: 1.45;
+        }
+        
+        .stat-tag {
+            background: #0077aa30;
+            border-radius: 2rem;
+            padding: 0.2rem 1rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+        .quote-text {
+            font-style: italic;
+            border-left: 3px solid #3b82f6;
+            padding-left: 1.2rem;
+            margin: 1rem 0;
+            color: #c2dcff;
+        }
+        hr {
+            border-color: #1f5470;
+            margin: 1rem 0;
+        }
+        
+        .under-dev {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        .under-dev h3 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: #8ba3c2;
+            margin-bottom: 0.5rem;
+        }
+        .under-dev p {
+            color: #6a7f9e;
+            font-size: 1rem;
+        }
+        
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.7rem;
+            padding: 1.2rem;
+            border-top: 1px solid rgba(0, 180, 230, 0.2);
+            color: #7b93ae;
+        }
+        
+        @media (max-width: 780px) {
+            .container {
+                padding: 1rem;
+            }
+            .glass-header {
+                padding: 0.8rem 1.2rem;
+            }
+            .title-main {
+                font-size: 1.3rem;
+            }
+            .sub {
+                font-size: 0.7rem;
+            }
+            .section-header {
+                font-size: 1.5rem;
+                padding-left: 0.8rem;
+            }
+            .hero-glow {
+                padding: 1.2rem;
+            }
+            .country-pill {
+                padding: 0.4rem 1rem;
+                font-size: 0.75rem;
+            }
+            .egypt-main-title {
+                font-size: 1.6rem !important;
+                line-height: 1.3 !important;
+            }
+            .timeline-grid {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            .timeline-year {
+                min-width: 95px;
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 550px) {
+            .two-columns {
+                gap: 1.2rem;
+            }
+            .info-block {
+                padding: 1rem 1.2rem;
+            }
+            .section-header {
+                font-size: 1.3rem;
+            }
+            .egypt-main-title {
+                font-size: 1.4rem !important;
+            }
+            .country-pill {
+                padding: 0.35rem 0.9rem;
+                font-size: 0.7rem;
+            }
+            .hero-glow {
+                padding: 1rem;
+            }
+            .timeline-year {
+                min-width: 85px;
+                font-size: 0.8rem;
+            }
+            .timeline-desc {
+                font-size: 0.8rem;
+            }
+            .under-dev h3 {
+                font-size: 1.2rem;
+            }
+        }
+        
+        .egypt-main-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0.5rem 0;
+            line-height: 1.2;
+        }
+    </style>
+</head>
+<body>
+<div class="bg-dynamic"></div>
+<div class="grid-overlay"></div>
+
+<div class="container">
+    <header class="glass-header">
+        <div>
+            <span class="title-main"><i class="fas fa-globe-asia"></i> СССР и Ближний Восток</span>
+            <div class="sub">Выполнил: Владимир Шуклин</div>
+        </div>
+        <div class="menu-wrapper">
+            <div class="menu-buttons" id="dynamicMenu"></div>
+        </div>
+    </header>
+
+    <!-- ПАНЕЛЬ ЕГИПТА -->
+    <div id="egyptDetailedPanel" class="page-panel active-panel">
+        <div class="hero-glow">
+            <div class="two-columns">
+                <div>
+                    <h1 class="egypt-main-title">СССР и Египет:<br>от первых контактов до геополитического разрыва</h1>
+                    <p style="margin-top: 1rem; font-size: 1rem;">История отношений между Советским Союзом и Египтом — это история взлётов и падений: от идеологической неприязни в 1920-е годы до дипломатического признания (1943), пика сотрудничества в эпоху Насера (1955–1970), строительства Асуанской плотины и, наконец, до охлаждения и разрыва при Садате (1972–1976).</p>
+                </div>
+                <div>
+                    <div class="img-place">
+                         <img src="images/map-egypt.png" alt="описание" style="width:100%; height:100%; object-fit:cover; border-radius:1.2rem;">
+                    </div>
+                    <div class="quote-text">
+                        <i class="fas fa-quote-left"></i> «СССР и Египет связывали два десятилетия интенсивного сотрудничества, но уже к середине 1970-х этот союз стал историей».
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 1. ПРЕДЫСТОРИЯ: 1920–1943 -->
+        <div class="section-header"><i class="fas fa-history"></i> 1. Предыстория: от враждебности к признанию (1920–1943)</div>
+        <div class="two-columns">
+            <div class="info-block">
+                <h3><i class="fas fa-fist-raised"></i> 1920-е – 1930-е: идеологическое противостояние</h3>
+                <p>После Октябрьской революции 1917 года Советская Россия воспринималась египетской монархией и британскими властями как угроза. Египет (формально независимый с 1922 года, но фактически под британским контролем) не спешил устанавливать отношения с «центром мировой революции». Коминтерн, в свою очередь, видел в Египте объект антиимпериалистической борьбы, но реальных рычагов влияния не имел. В 1920-е – 1930-е годы контакты были эпизодическими и в основном через Коммунистическую партию Египта (В январе 1923 Александрийская секция Социалистической партии Египта (основана в 1921 году) во главе с Хусни Аль-Ораби в ходе проведенного ею в окрестностях Александрии съезда провозгласила себя Египетской коммунистической партией), которая находилась в глубоком подполье и подвергалась репрессиям.</p>
+                <div class="img-place"> <img src="images/kayr-1920.jpg" alt="описание" style="width:100%; height:100%; object-fit:cover; border-radius:1.2rem;"></div>
+            </div>
+            <div class="info-block">
+                <h3><i class="fas fa-handshake"></i> 1943: установление дипломатических отношений</h3>
+                <p>Перелом наступил во время Второй мировой войны. В 1943 году, в условиях борьбы с нацистской Германией, СССР и Египет (формально нейтральный до 1945 года) установили дипломатические отношения. Это было прагматичное решение: Москва стремилась расширить своё присутствие на Ближнем Востоке, а Каир искал противовес британскому доминированию. 26 августа 1943 года было подписано соглашение об обмене дипломатическими миссиями — с этого момента начинается официальная история двусторонних отношений. На фото Иван Михайлович Майский (полномочный посол СССР в Великобритании (1932—1943). Именно он подписал это соглашение) </p>
+                <div class="img-place"><img src="images/mayskiy.jpg" alt="описание" style="width:100%; height:100%; object-fit:cover; border-radius:1.2rem;"></div>
+            </div>
+        </div>
+
+        <!-- 2. ПЕРИОД НАСЕРА -->
+        <div class="section-header"><i class="fas fa-star-of-life"></i> 2. Эпоха Насера: взлёт сотрудничества (1952–1970)</div>
+        
+        <div class="two-columns">
+            <div class="info-block">
+                <h3><i class="fas fa-crown"></i> Революция 1952 года и поворот к СССР</h3>
+                <p>После свержения монархии «свободными офицерами» во главе с Нагибом и Насером Египет начал искать альтернативу западному влиянию. Отказ США и Великобритании финансировать Асуанскую плотину (1956) стал решающим моментом. СССР предложил более выгодные условия, и в 1955 году через Чехословакию был заключён первый крупный военный контракт — поставки МиГ-15, танков Т-34, артиллерии. Это стало началом системного военно-технического сотрудничества. 23 июня 1956 года Гамаль Абдель Насер был избран президентом Египта. В мае 1964-го во время официального визита Хрущева в Объединенную Арабскую Республику, объединявшую тогда нынешние Египет, Сирию и отчасти Ирак, Насер наградил советского лидера орденом Нила. На фото Никита Хрущев и Насер</p>
+                <div class="img-place"><img src="images/nacer-i-hrushev.jpg" alt="описание" style="width:100%; height:100%; object-fit:cover; border-radius:1.2rem;"></div>
+            </div>
+            <div class="info-block">
+                <h3><i class="fas fa-water"></i> Суэцкий кризис 1956 года</h3>
+                <p>Национализация Суэцкого канала привела к тройственной агрессии (Англия, Франция, Израиль). СССР выступил с ультиматумом, пригрозив ракетными ударами по Парижу и Лондону. Это остановило интервенцию и сделало СССР главным защитником арабского мира. Престиж Насера достиг пика, а советско-египетские отношения перешли в фазу стратегического союза.</p>
+                <div class="img-place"><img src="images/suez.png" alt="описание" style="width:100%; height:100%; object-fit:cover; border-radius:1.2rem;"></div>
+            </div>
+        </div>
+        
+        <div class="info-block">
+            <h4><i class="fas fa-dam"></i> Асуанская плотина — главный символ сотрудничества</h4>
+            <p>Строительство Асуанской высотной плотины (1960–1970) стало крупнейшим советским инфраструктурным проектом за рубежом. СССР предоставил кредиты на сумму более 1 млрд рублей, поставил оборудование, направил свыше 2000 инженеров и рабочих. Плотина позволила регулировать сток Нила, предотвратить наводнения, оросить миллионы гектаров и дала стране электроэнергию. 12 советских специалистов получили звание Героя Социалистического Труда. Это был пик советско-египетской дружбы.</p>
+            <div class="img-place"><img src="images/asuansk.jpg" alt="описание" style="width:100%; height:100%; object-fit:cover; border-radius:1.2rem;"></div>
+        </div>
+        
+        <div class="two-columns">
+            <div class="info-block">
+                <h3><i class="fas fa-fighter-jet"></i> Военное сотрудничество (1955–1972)</h3>
+                <p>СССР поставил Египту более 500 самолётов (МиГ-17, МиГ-19, МиГ-21, Ту-16), 1200 танков (Т-34, Т-54, Т-55), ракетные катера, системы ПВО (С-75). Советские военные советники участвовали в подготовке египетской армии. После поражения в Шестидневной войне (1967) СССР экстренно восстановил вооружённые силы Египта, отправив эскадру кораблей и зенитные ракетные дивизионы. В 1970 году в Египте находилось около 20 000 советских военных специалистов.</p>
+                <div class="img-place"><img src="images/mig.jpg" alt="описание" style="width:100%; height:100%; object-fit:cover; border-radius:1.2rem;"></div>
+            </div>
+            <div class="info-block">
+                <h3><i class="fas fa-industry"></i> Экономическое и культурное влияние</h3>
+                <p>СССР помог построить Хелуанский металлургический комбинат (стал основой египетской чёрной металлургии), Асуанскую плотину, ряд энергетических объектов. Тысячи египетских студентов учились в советских вузах. В Каире и Александрии работали культурные центры. Это сформировало целое поколение египетской интеллигенции, ориентированной на советскую модель.</p>
+                <div class="img-place"><img src="images/students.png" alt="описание" style="width:100%; height:100%; object-fit:cover; border-radius:1.2rem;"></div>
+            </div>
+        </div>
+
+        <!-- 3. ЭПОХА САДАТА -->
+        <div class="section-header"><i class="fas fa-exchange-alt"></i> 3. Анвар Садат: от Договора о дружбе до денонсации (1970–1976)</div>
+        
+        <div class="info-block">
+            <h4><i class="fas fa-file-contract"></i> 1971: Договор о дружбе и сотрудничестве</h4>
+            <p>После смерти Насера (28 сентября 1970) новый президент Анвар Садат сначала продолжил курс на сотрудничество с Москвой. 27 мая 1971 года в Каире был подписан «Договор о дружбе и сотрудничестве между СССР и Египтом» сроком на 15 лет. Документ предусматривал консультации при возникновении угрозы миру, развитие экономических связей и военное сотрудничество. Однако уже в 1972 году Садат, недовольный тем, что СССР не даёт наступательного оружия для войны с Израилем, выслал 20 000 советских военных специалистов. Это стало первым серьёзным ударом по отношениям. На фото представлены Николай Викторович Подгорный и Анвар Садат, они подписали договор о дружбе и сотрудничестве между СССР и Египтом </p>
+            <div class="img-place"><img src="images/sadat-podgorniy.png" alt="описание" style="width:100%; height:100%; object-fit:cover; border-radius:1.2rem;"></div>
+        </div>
+        
+        <div class="two-columns">
+            <div class="info-block">
+                <h3><i class="fas fa-bomb"></i> Война Судного дня (1973)</h3>
+                <p>Несмотря на высылку советников, СССР продолжал поставлять оружие. В октябре 1973 года Египет и Сирия начали войну против Израиля. Советское оружие (ПВО, танки, ракеты) сыграло ключевую роль. СССР использовал море и воздух для снабжения, а также направил военных специалистов (уже неофициально). Однако после войны Садат начал открыто сближаться с США, что вызвало недовольство Москвы.</p>
+                <div class="img-place"><img src="images/vijna-sudnogo-dnya.png" alt="описание" style="width:100%; height:100%; object-fit:cover; border-radius:1.2rem;"></div>
+            </div>
+            <div class="info-block">
+                <h3><i class="fas fa-times-circle"></i> 1976: денонсация договора и разрыв</h3>
+                <p>В марте 1976 года Садат в одностороннем порядке денонсировал Договор о дружбе с СССР, запретил заход советских кораблей в египетские порты и аннулировал соглашение о военном сотрудничестве. Это был финал советско-египетского союза. В 1977 году Садат посетил Иерусалим, а в 1979 году Египет подписал Кэмп-Дэвидские соглашения с Израилем, окончательно переориентировавшись на США. СССР разорвал дипломатические отношения (восстановлены только в 1984 году, уже после смерти Садата). На фото президент Египта Анвар Садат и президент США Джимми Картер во время встречи в Вашингтоне, март 1979 года</p>
+                <div class="img-place"><img src="images/sadat-usa.jpg" alt="описание" style="width:100%; height:100%; object-fit:cover; border-radius:1.2rem;"></div>
+            </div>
+        </div>
+
+        <!-- 4. ХРОНОЛОГИЯ 1920–1991 -->
+        <div class="section-header"><i class="fas fa-timeline"></i> 4. Хронология советско-египетских отношений (1920–1991)</div>
+        <div class="hero-glow">
+            <div class="timeline-grid">
+                <div class="timeline-item">
+                    <div class="timeline-year">1920–1921</div>
+                    <div class="timeline-desc">Создание Коммунистической партии Египта, репрессии, отсутствие официальных контактов</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1943, 26 августа</div>
+                    <div class="timeline-desc">Установление дипломатических отношений между СССР и Египтом</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1952</div>
+                    <div class="timeline-desc">Революция свободных офицеров, приход к власти Насера</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1955</div>
+                    <div class="timeline-desc">Чехословацко-египетское военное соглашение (первый крупный контракт)</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1956</div>
+                    <div class="timeline-desc">Суэцкий кризис, СССР останавливает агрессию Запада</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1960–1970</div>
+                    <div class="timeline-desc">Строительство Асуанской плотины при участии СССР</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1967</div>
+                    <div class="timeline-desc">Шестидневная война, СССР восстанавливает египетскую армию</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1970, 28 сентября</div>
+                    <div class="timeline-desc">Смерть Насера, приход к власти Анвара Садата</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1971, 27 мая</div>
+                    <div class="timeline-desc">Подписание Договора о дружбе и сотрудничестве</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1972, июль</div>
+                    <div class="timeline-desc">Высылка 20 000 советских военных специалистов из Египта</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1973, октябрь</div>
+                    <div class="timeline-desc">Война Судного дня, поставки оружия из СССР</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1976, март</div>
+                    <div class="timeline-desc">Денонсация Договора о дружбе, разрыв военного сотрудничества</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1977–1979</div>
+                    <div class="timeline-desc">Кэмп-Дэвидские соглашения, окончательная переориентация на США, разрыв дипотношений с СССР</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1984, июль</div>
+                    <div class="timeline-desc">Восстановление дипломатических отношений (при Хосни Мубараке и Черненко)</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1985–1991</div>
+                    <div class="timeline-desc">Минимальные контакты, СССР сосредоточен на Афганистане и перестройке; экономические связи остаются, но политического сближения нет</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1991, декабрь</div>
+                    <div class="timeline-desc">Распад СССР. Асуанская плотина, Хелуанский комбинат и подготовленные кадры — главное наследие советско-египетского сотрудничества</div>
+                </div>
+            </div>
+            <div class="img-place" style="margin-top: 1.2rem;"><img src="images/asuan-medal.jpg" alt="описание" style="width:100%; height:100%; object-fit:cover; border-radius:1.2rem;"></div>
+            <p>Медаль за строительство Асуанской плотины</p>
+        </div>
+
+        <!-- 5. ИТОГИ И НАСЛЕДИЕ -->
+        <div class="section-header"><i class="fas fa-monument"></i> 5. Историческое значение и наследие</div>
+        <div class="info-block">
+            <p>Советско-египетские отношения — классический пример того, как геополитический союз может возникнуть, достичь пика и разрушиться за два десятилетия. Главные итоги:</p>
+            <ul style="margin: 1rem 0 0 1.5rem;">
+                <li> <strong>Инфраструктурное наследие:</strong> Асуанская плотина, Хелуанский металлургический комбинат — работают до сих пор.</li>
+                <li> <strong>Военно-техническое влияние:</strong> египетская армия на десятилетия сохранила советскую материальную базу.</li>
+                <li> <strong>Образовательный мост:</strong> тысячи египтян с советским образованием определили развитие страны.</li>
+                <li> <strong>Политический урок:</strong> союз, основанный на личной дружбе лидеров (Насер-Хрущёв), оказался хрупким перед сменой элит (Садат).</li>
+            </ul>
+            <div class="img-place"><img src="images/aswan-pamat.jpg" alt="описание" style="width:100%; height:100%; object-fit:cover; border-radius:1.2rem;"></div>
+            <p>Памятник арабо-советской дружбе (цветок лотоса) установлен в честь завершения строительства Асуанской плотины в 1970 году.</p>
+        </div>
+    </div>
+
+    <!-- Заглушки для остальных стран -->
+    <div id="israelPanel" class="page-panel"><div class="hero-glow under-dev"><h3>В разработке</h3><p>Материалы готовятся</p></div></div>
+    <div id="palestinePanel" class="page-panel"><div class="hero-glow under-dev"><h3>В разработке</h3><p>Материалы готовятся</p></div></div>
+    <div id="lebanonPanel" class="page-panel"><div class="hero-glow under-dev"><h3>В разработке</h3><p>Материалы готовятся</p></div></div>
+    <div id="syriaPanel" class="page-panel"><div class="hero-glow under-dev"><h3>В разработке</h3><p>Материалы готовятся</p></div></div>
+    <div id="jordanPanel" class="page-panel"><div class="hero-glow under-dev"><h3>В разработке</h3><p>Материалы готовятся</p></div></div>
+    <div id="iraqPanel" class="page-panel"><div class="hero-glow under-dev"><h3>В разработке</h3><p>Материалы готовятся</p></div></div>
+    <div id="saudiPanel" class="page-panel"><div class="hero-glow under-dev"><h3>В разработке</h3><p>Материалы готовятся</p></div></div>
+    <div id="iranPanel" class="page-panel"><div class="hero-glow under-dev"><h3>В разработке</h3><p>Материалы готовятся</p></div></div>
+    <div id="yemenPanel" class="page-panel"><div class="hero-glow under-dev"><h3>В разработке</h3><p>Материалы готовятся</p></div></div>
+    <div id="omanPanel" class="page-panel"><div class="hero-glow under-dev"><h3>В разработке</h3><p>Материалы готовятся</p></div></div>
+    <div id="defaultPanel" class="page-panel"><div class="hero-glow under-dev"><h3>В разработке</h3><p>Материалы готовятся</p></div></div>
+</div>
+
+<footer>
+    <i class="fas fa-book-open"></i> СССР и страны Ближнего Востока
+</footer>
+</div>
+
+<script>
+    const countriesData = [
+        { name: "Египет", id: "egypt", panelId: "egyptDetailedPanel" },
+        { name: "Израиль", id: "israel", panelId: "israelPanel" },
+        { name: "Палестина", id: "palestine", panelId: "palestinePanel" },
+        { name: "Ливан", id: "lebanon", panelId: "lebanonPanel" },
+        { name: "Сирия", id: "syria", panelId: "syriaPanel" },
+        { name: "Иордания", id: "jordan", panelId: "jordanPanel" },
+        { name: "Ирак", id: "iraq", panelId: "iraqPanel" },
+        { name: "Саудовская Аравия", id: "saudi", panelId: "saudiPanel" },
+        { name: "Иран", id: "iran", panelId: "iranPanel" },
+        { name: "Йемен", id: "yemen", panelId: "yemenPanel" },
+        { name: "Оман", id: "oman", panelId: "omanPanel" }
+    ];
+
+    const menuContainer = document.getElementById("dynamicMenu");
+    const panelsMap = {};
+    
+    function registerPanels() {
+        countriesData.forEach(c => {
+            const el = document.getElementById(c.panelId);
+            if (el) panelsMap[c.id] = el;
+        });
+        const defaultPanel = document.getElementById("defaultPanel");
+        if(defaultPanel) panelsMap["default"] = defaultPanel;
+        if(panelsMap["egypt"]) panelsMap["egypt"].classList.add("active-panel");
+    }
+
+    function showCountryPanel(countryId) {
+        Object.values(panelsMap).forEach(panel => {
+            if(panel) panel.classList.remove("active-panel");
+        });
+        let target = panelsMap[countryId];
+        if (!target) target = panelsMap["default"] || document.getElementById("defaultPanel");
+        if(target) target.classList.add("active-panel");
+        document.querySelectorAll(".country-pill").forEach(btn => {
+            if(btn.getAttribute("data-country") === countryId) {
+                btn.classList.add("active");
+            } else {
+                btn.classList.remove("active");
+            }
+        });
+    }
+
+    function buildMenu() {
+        menuContainer.innerHTML = "";
+        countriesData.forEach(c => {
+            const btn = document.createElement("button");
+            btn.className = "country-pill";
+            btn.setAttribute("data-country", c.id);
+            btn.textContent = c.name;
+            btn.addEventListener("click", () => {
+                if(c.id === "egypt") {
+                    showCountryPanel("egypt");
+                } else {
+                    showCountryPanel(c.id);
+                }
+            });
+            menuContainer.appendChild(btn);
+        });
+        const egyptBtn = document.querySelector(".country-pill[data-country='egypt']");
+        if(egyptBtn) egyptBtn.classList.add("active");
+    }
+
+    registerPanels();
+    buildMenu();
+    
+    if(!document.querySelector(".page-panel.active-panel")) {
+        if(panelsMap["egypt"]) panelsMap["egypt"].classList.add("active-panel");
+    }
+</script>
+</body>
+</html>
